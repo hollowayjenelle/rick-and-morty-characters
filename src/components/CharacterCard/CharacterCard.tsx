@@ -4,8 +4,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { Character } from "../../types";
+import FavouriteButton from "../FavouriteButton";
 import "./styles.css";
 
 interface CharacterProps {
@@ -29,9 +29,7 @@ const CharacterCard: React.FC<CharacterProps> = ({ character }) => {
           {character.species} - {character.status}
         </Typography>
         <CardActions>
-          <Button variant="contained" size="medium" color="success">
-            Add to Favourites
-          </Button>
+          <FavouriteButton character={character} />
         </CardActions>
       </CardContent>
     </Card>
