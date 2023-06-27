@@ -37,14 +37,7 @@ const CharactersView = () => {
   return (
     <div className="card-view">
       {data?.results.map((character: Character) => (
-        <CharacterCard
-          key={character.id}
-          image={character.image}
-          name={character.name}
-          status={character.status}
-          species={character.species}
-          location={character.location.name}
-        />
+        <CharacterCard key={character.id} character={character} />
       ))}
       <Pagination
         count={data?.info.pages}

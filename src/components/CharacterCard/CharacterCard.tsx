@@ -5,35 +5,28 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { Character } from "../../types";
 import "./styles.css";
 
 interface CharacterProps {
-  image: string;
-  name: string;
-  status: string;
-  species: string;
-  location: string;
+  character: Character;
 }
 
-const CharacterCard: React.FC<CharacterProps> = ({
-  image,
-  name,
-  status,
-  species,
-  location,
-}) => {
+const CharacterCard: React.FC<CharacterProps> = ({ character }) => {
   return (
     <Card className="character-card">
       <CardMedia
         component="img"
-        alt={name}
+        alt={character.name}
         className="character-img"
-        image={image}
+        image={character.image}
       />
       <CardContent>
-        <Typography className="character-name" variant="h5">{name}</Typography>
+        <Typography className="character-name" variant="h5">
+          {character.name}
+        </Typography>
         <Typography className="character-info">
-          {species} - {status}
+          {character.species} - {character.status}
         </Typography>
         <CardActions>
           <Button variant="contained" size="medium" color="success">
