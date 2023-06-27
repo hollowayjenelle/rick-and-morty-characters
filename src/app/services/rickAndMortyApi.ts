@@ -5,7 +5,10 @@ export const rickAndMortyApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://rickandmortyapi.com/api" }),
   endpoints: (builder) => ({
     getCharacters: builder.query({
-      query: (page = 1, species = '') => `/character/?page=${page}&species=${species}`,
+      query: (args) => {
+        const { page, species } = args;
+        return `/character/?page=${page}&species=${species}`;
+      },
     }),
   }),
 });

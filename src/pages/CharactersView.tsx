@@ -6,10 +6,25 @@ import Pagination from "@mui/material/Pagination";
 
 const CharactersView = () => {
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading, isFetching, error } = useGetCharactersQuery(page);
+  const [speciesFilter, setSpeciesFilter] = useState<string>("");
+  const { data, isLoading, isFetching, error } = useGetCharactersQuery({
+    page: page,
+    species: speciesFilter,
+  });
+  let prevButton: HTMLElement;
 
   function handleChange(event: ChangeEvent<unknown>, value: number) {
     setPage(value);
+  }
+
+  function changeFilter(filterType: string, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    setSpeciesFilter(filterType);
+    const target = e.target as HTMLElement;
+    if (prevButton) {
+      prevButton.classList.remove("active-btn");
+    }
+    target.classList.add("active-btn");
+    prevButton = target;
   }
 
   if (isLoading || isFetching) {
@@ -35,15 +50,25 @@ const CharactersView = () => {
   }
 
   return (
-    <div className="card-view">
-      {data?.results.map((character: Character) => (
-        <CharacterCard key={character.id} character={character} />
-      ))}
-      <Pagination
-        count={data?.info.pages}
-        page={page}
-        onChange={handleChange}
-      />
+    <div>
+      <div>
+        <button onClick={(event) => changeFilter("", event)}>All</button>
+        <button onClick={(event) => changeFilter("human", event)}>Human</button>
+        <button onClick={(event) => changeFilter("animal", event)}>
+          Animal
+        </button>
+        <button onClick={(event) => changeFilter("alien", event)}>Alien</button>
+      </div>
+      <div className="card-view">
+        {data?.results.map((character: Character) => (
+          <CharacterCard key={character.id} character={character} />
+        ))}
+        <Pagination
+          count={data?.info.pages}
+          page={page}
+          onChange={handleChange}
+        />
+      </div>
     </div>
   );
 };
