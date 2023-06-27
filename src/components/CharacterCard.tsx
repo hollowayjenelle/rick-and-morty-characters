@@ -31,6 +31,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
         <Typography>
           {species} - {status}
         </Typography>
+        <Typography>Last seen on {location}</Typography>
         <CardActions>
           <Button size="small">Add to Favourites</Button>
         </CardActions>
