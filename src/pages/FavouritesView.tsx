@@ -1,9 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import CharacterCard from "../components/CharacterCard/CharacterCard";
 
 const FavouritesView: React.FC = () => {
+  const favourites = useSelector((state: RootState) => state.favourites);
   return (
-    <div>
-      <h1>This is favourites</h1>
+    <div className="card-view">
+      {favourites.map((character) => (
+        <CharacterCard character={character} />
+      ))}
     </div>
   );
 };
