@@ -8,7 +8,7 @@ const FavouritesView: React.FC = () => {
   return (
     <div className="card-view">
       {favourites.map((character) => (
-        <CharacterCard character={character} />
+        <CharacterCard key={character.id} character={character} />
       ))}
     </div>
   );
