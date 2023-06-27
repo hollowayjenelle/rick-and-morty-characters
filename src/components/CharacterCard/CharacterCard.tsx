@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import "./styles.css";
 
 interface CharacterProps {
   image: string;
@@ -22,18 +23,22 @@ const CharacterCard: React.FC<CharacterProps> = ({
   location,
 }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia component="img" alt={name} height="140" image={image} />
+    <Card className="character-card">
+      <CardMedia
+        component="img"
+        alt={name}
+        className="character-img"
+        image={image}
+      />
       <CardContent>
-        <Typography gutterBottom variant="h4" component="div">
-          {name}
-        </Typography>
-        <Typography>
+        <Typography className="character-name" variant="h5">{name}</Typography>
+        <Typography className="character-info">
           {species} - {status}
         </Typography>
-        <Typography>Last seen on {location}</Typography>
         <CardActions>
-          <Button size="small">Add to Favourites</Button>
+          <Button variant="contained" size="medium" color="success">
+            Add to Favourites
+          </Button>
         </CardActions>
       </CardContent>
     </Card>
