@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const FavouritesView : React.FC = () => {
-    return (
-        <div>
-            This is favourites
-        </div>
-    );
+const FavouritesView: React.FC = () => {
+  return (
+    <div>
+      <h1>This is favourites</h1>
+    </div>
+  );
 };
 
 export default FavouritesView;

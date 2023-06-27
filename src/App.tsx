@@ -10,7 +10,7 @@ function App() {
           <a href="http://localhost:3000/">All Characters</a>
         </li>
         <li>
-          <a href="https://localhost:3000/favourites">Favourites</a>
+          <a href="http://localhost:3000/favourites">Favourites</a>
         </li>
       </ul>
       <RouterView />
