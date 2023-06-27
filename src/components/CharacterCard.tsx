@@ -24,7 +24,17 @@ const CharacterCard: React.FC<CharacterProps> = ({
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia component="img" alt={name} height="140" image={image} />
-      <CardContent></CardContent>
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="div">
+          {name}
+        </Typography>
+        <Typography>
+          {species} - {status}
+        </Typography>
+        <CardActions>
+          <Button size="small">Add to Favourites</Button>
+        </CardActions>
+      </CardContent>
     </Card>
   );
 };
