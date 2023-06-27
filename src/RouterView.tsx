@@ -7,7 +7,7 @@ const RouterView: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/characters" element={<CharactersView />} />
+        <Route path="/" element={<CharactersView />} />
       </Routes>
     </BrowserRouter>
   );

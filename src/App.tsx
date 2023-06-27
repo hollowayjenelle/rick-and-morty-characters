@@ -1,11 +1,19 @@
 import React from "react";
 import "./App.css";
-import CharactersView from "./pages/CharactersView";
+import RouterView from "./RouterView";
 
 function App() {
   return (
     <div className="App">
-      <CharactersView />
+      <ul>
+        <li>
+          <a href="http://localhost:3000/">All Characters</a>
+        </li>
+        <li>
+          <a href="https://localhost:3000/favourites">Favourites</a>
+        </li>
+      </ul>
+      <RouterView />
     </div>
   );
 }
