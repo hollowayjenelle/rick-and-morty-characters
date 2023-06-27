@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { useGetCharactersQuery } from "../app/services/rickAndMortyApi";
-import CharacterCard from "../components/CharacterCard";
+import CharacterCard from "../components/CharacterCard/CharacterCard";
 import { Character } from "../types";
 import Pagination from "@mui/material/Pagination";
 
@@ -35,7 +35,7 @@ const CharactersView = () => {
   }
 
   return (
-    <div>
+    <div className="card-view">
       {data?.results.map((character: Character) => (
         <CharacterCard
           key={character.id}
