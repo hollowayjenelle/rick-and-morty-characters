@@ -10,6 +10,11 @@ export const rickAndMortyApi = createApi({
         return `/character/?page=${page}&species=${species}`;
       },
     }),
+    getSingleCharacter: builder.query({
+      query: (id) => {
+        return `/character/${id}`;
+      },
+    }),
   }),
 });
 
