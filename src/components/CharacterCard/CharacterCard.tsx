@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Character } from "../../types";
 import FavouriteButton from "../FavouriteButton";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 interface CharacterProps {
@@ -23,7 +24,7 @@ const CharacterCard: React.FC<CharacterProps> = ({ character }) => {
       />
       <CardContent>
         <Typography className="character-name" variant="h5">
-          {character.name}
+          <Link to={`/character/${character.id}`}>{character.name}</Link>
         </Typography>
         <Typography className="character-info">
           {character.species} - {character.status}
