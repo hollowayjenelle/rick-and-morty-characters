@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import CharactersView from "./pages/CharactersView";
 import FavouritesView from "./pages/FavouritesView";
+import CharacterDetail from "./pages/CharacterDetail";
 
 const RouterView: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const RouterView: React.FC = () => {
       <Routes>
         <Route path="/" element={<CharactersView />} />
         <Route path="/favourites" element={<FavouritesView />} />
+        <Route path="/character/:id" element={<CharacterDetail />}/>
       </Routes>
     </BrowserRouter>
   );

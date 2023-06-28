@@ -7,10 +7,10 @@ function App() {
     <div className="App">
       <ul>
         <li>
-          <a href="http://localhost:3000/">All Characters</a>
+          <a href="/">All Characters</a>
         </li>
         <li>
-          <a href="http://localhost:3000/favourites">Favourites</a>
+          <a href="/favourites">Favourites</a>
         </li>
       </ul>
       <RouterView />
