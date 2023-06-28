@@ -15,7 +15,11 @@ const CharacterDetail: React.FC = () => {
     error,
   } = useGetSingleCharacterQuery(params.id);
 
-  const firstEpisodeId = character.episode[0]?.split("/")[5];
+  let firstEpisodeId;
+
+  if (character) {
+    firstEpisodeId = character.episode[0]?.split("/")[5];
+  }
 
   const { data: episode } = useGetEpisodeQuery(firstEpisodeId);
 
