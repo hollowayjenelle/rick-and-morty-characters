@@ -18,4 +18,5 @@ export const rickAndMortyApi = createApi({
   }),
 });
 
-export const { useGetCharactersQuery } = rickAndMortyApi;
+export const { useGetCharactersQuery, useGetSingleCharacterQuery } =
+  rickAndMortyApi;
