@@ -1,12 +1,27 @@
 import React from "react";
 import { useParams } from "react-router";
-import { useGetSingleCharacterQuery } from "../app/services/rickAndMortyApi";
+import {
+  useGetEpisodeQuery,
+  useGetSingleCharacterQuery,
+} from "../app/services/rickAndMortyApi";
 
 const CharacterDetail: React.FC = () => {
   const params = useParams();
-  const { data, isLoading, isFetching, error } = useGetSingleCharacterQuery(
-    params.id
-  );
+  const {
+    data: character,
+    isLoading,
+    isFetching,
+    error,
+  } = useGetSingleCharacterQuery(params.id);
+  
+
+  const firstEpisodeId = character.episode[0]?.split("/")[5];
+
+  const { data: episode } = useGetEpisodeQuery(firstEpisodeId);
+
+  if (!character) {
+    return <div>No character data available.</div>;
+  }
 
   if (isLoading || isFetching) {
     return <div>Character loading...</div>;
@@ -33,15 +48,21 @@ const CharacterDetail: React.FC = () => {
   return (
     <div className="character-details">
       <div className="character-details-text">
-        <h1 className="character-name">{data?.name}</h1>
+        <h1 className="character-name">{character.name}</h1>
         <p className="character-status">
-          {data?.species} - {data?.status}
+          {character.species} - {character.status}
         </p>
-        <p>Gender: {data?.gender}</p>
-        <p>Origin: {data?.origin.name}</p>
-        <p>Location: {data?.location.name}</p>
+        <p>Gender: {character.gender}</p>
+        <p>Origin: {character.origin.name}</p>
+        <p>Location: {character.location.name}</p>
+        {episode && (
+          <p>
+            First seen in: {episode.episode} - {episode.name} aired on{" "}
+            {episode.air_date}
+          </p>
+        )}
       </div>
-      <img src={data?.image} alt={data?.name} />
+      <img src={character.image} alt={character.name} />
     </div>
   );
 };
