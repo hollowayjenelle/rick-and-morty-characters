@@ -4,6 +4,7 @@ import {
   useGetEpisodeQuery,
   useGetSingleCharacterQuery,
 } from "../app/services/rickAndMortyApi";
+import FavouriteButton from "../components/FavouriteButton";
 
 const CharacterDetail: React.FC = () => {
   const params = useParams();
@@ -13,7 +14,6 @@ const CharacterDetail: React.FC = () => {
     isFetching,
     error,
   } = useGetSingleCharacterQuery(params.id);
-  
 
   const firstEpisodeId = character.episode[0]?.split("/")[5];
 
@@ -63,6 +63,7 @@ const CharacterDetail: React.FC = () => {
         )}
       </div>
       <img src={character.image} alt={character.name} />
+      <FavouriteButton character={character} />
     </div>
   );
 };
