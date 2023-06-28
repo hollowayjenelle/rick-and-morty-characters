@@ -15,8 +15,13 @@ export const rickAndMortyApi = createApi({
         return `/character/${id}`;
       },
     }),
+    getEpisode: builder.query({
+      query: (id) => {
+        return `/episode/${id}`;
+      },
+    }),
   }),
 });
 
-export const { useGetCharactersQuery, useGetSingleCharacterQuery } =
+export const { useGetCharactersQuery, useGetSingleCharacterQuery, useGetEpisodeQuery } =
   rickAndMortyApi;
