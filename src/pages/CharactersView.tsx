@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useState } from "react";
 import { useGetCharactersQuery } from "../app/services/rickAndMortyApi";
-import CharacterCard from "../components/CharacterCard/CharacterCard";
-import { Character } from "../types";
 import Pagination from "@mui/material/Pagination";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
+import CardsView from "../components/CardsView";
 
 const CharactersView = () => {
   const [page, setPage] = useState<number>(1);
@@ -38,28 +37,6 @@ const CharactersView = () => {
     prevButton = target;
   }
 
-  if (isLoading || isFetching) {
-    return <div>Characters loading</div>;
-  }
-
-  if (error) {
-    if ("status" in error) {
-      // you can access all properties of `FetchBaseQueryError` here
-      const errMsg =
-        "error" in error ? error.error : JSON.stringify(error.data);
-
-      return (
-        <div>
-          <div>An error has occurred:</div>
-          <div>{errMsg}</div>
-        </div>
-      );
-    } else {
-      // you can access all properties of `SerializedError` here
-      return <div>{error.message}</div>;
-    }
-  }
-
   return (
     <div>
       <div>
@@ -85,16 +62,17 @@ const CharactersView = () => {
           />
         </div>
       </div>
-      <div className="card-view">
-        {data?.results.map((character: Character) => (
-          <CharacterCard key={character.id} character={character} />
-        ))}
-        <Pagination
-          count={data?.info.pages}
-          page={page}
-          onChange={handlePageChange}
-        />
-      </div>
+      <CardsView
+        data={data}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        error={error}
+      />
+      <Pagination
+        count={data?.info.pages}
+        page={page}
+        onChange={handlePageChange}
+      />
     </div>
   );
 };
