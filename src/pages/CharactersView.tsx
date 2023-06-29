@@ -3,21 +3,32 @@ import { useGetCharactersQuery } from "../app/services/rickAndMortyApi";
 import CharacterCard from "../components/CharacterCard/CharacterCard";
 import { Character } from "../types";
 import Pagination from "@mui/material/Pagination";
+import Input from "@mui/material/Input";
 
 const CharactersView = () => {
   const [page, setPage] = useState<number>(1);
   const [speciesFilter, setSpeciesFilter] = useState<string>("");
+  const [characterName, setCharacterName] = useState<string>("");
   const { data, isLoading, isFetching, error } = useGetCharactersQuery({
     page: page,
     species: speciesFilter,
   });
   let prevButton: HTMLElement;
 
-  function handleChange(event: ChangeEvent<unknown>, value: number) {
+  function handlePageChange(event: ChangeEvent<unknown>, value: number) {
     setPage(value);
   }
 
-  function changeFilter(filterType: string, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  function handleNameChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    setCharacterName(event.target.value);
+  }
+
+  function changeFilter(
+    filterType: string,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
     setSpeciesFilter(filterType);
     const target = e.target as HTMLElement;
     if (prevButton) {
@@ -52,12 +63,25 @@ const CharactersView = () => {
   return (
     <div>
       <div>
-        <button onClick={(event) => changeFilter("", event)}>All</button>
-        <button onClick={(event) => changeFilter("human", event)}>Human</button>
-        <button onClick={(event) => changeFilter("animal", event)}>
-          Animal
-        </button>
-        <button onClick={(event) => changeFilter("alien", event)}>Alien</button>
+        <div>
+          <button onClick={(event) => changeFilter("", event)}>All</button>
+          <button onClick={(event) => changeFilter("human", event)}>
+            Human
+          </button>
+          <button onClick={(event) => changeFilter("animal", event)}>
+            Animal
+          </button>
+          <button onClick={(event) => changeFilter("alien", event)}>
+            Alien
+          </button>
+        </div>
+        <div>
+          <Input
+            placeholder="Search for Character"
+            value={characterName}
+            onChange={() => handleNameChange}
+          />
+        </div>
       </div>
       <div className="card-view">
         {data?.results.map((character: Character) => (
@@ -66,7 +90,7 @@ const CharactersView = () => {
         <Pagination
           count={data?.info.pages}
           page={page}
-          onChange={handleChange}
+          onChange={handlePageChange}
         />
       </div>
     </div>
