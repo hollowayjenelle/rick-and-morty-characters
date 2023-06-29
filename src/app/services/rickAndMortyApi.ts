@@ -6,8 +6,8 @@ export const rickAndMortyApi = createApi({
   endpoints: (builder) => ({
     getCharacters: builder.query({
       query: (args) => {
-        const { page, species } = args;
-        return `/character/?page=${page}&species=${species}`;
+        const { page, species, name } = args;
+        return `/character/?page=${page}&species=${species}&name=${name}`;
       },
     }),
     getSingleCharacter: builder.query({

@@ -3,7 +3,8 @@ import { useGetCharactersQuery } from "../app/services/rickAndMortyApi";
 import CharacterCard from "../components/CharacterCard/CharacterCard";
 import { Character } from "../types";
 import Pagination from "@mui/material/Pagination";
-import Input from "@mui/material/Input";
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
 
 const CharactersView = () => {
   const [page, setPage] = useState<number>(1);
@@ -12,6 +13,7 @@ const CharactersView = () => {
   const { data, isLoading, isFetching, error } = useGetCharactersQuery({
     page: page,
     species: speciesFilter,
+    name: characterName,
   });
   let prevButton: HTMLElement;
 
@@ -19,9 +21,7 @@ const CharactersView = () => {
     setPage(value);
   }
 
-  function handleNameChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
     setCharacterName(event.target.value);
   }
 
@@ -76,10 +76,12 @@ const CharactersView = () => {
           </button>
         </div>
         <div>
-          <Input
-            placeholder="Search for Character"
+          <TextField
+            variant="outlined"
+            placeholder="Search for character"
             value={characterName}
-            onChange={() => handleNameChange}
+            onChange={handleNameChange}
+            InputProps={{ endAdornment: <SearchIcon /> }}
           />
         </div>
       </div>
